@@ -11,7 +11,9 @@ async fn main() {
     let canister_id = Principal::from_text("qvhpv-4qaaa-aaaaa-aaagq-cai").unwrap();
     let method_name = "print".to_string();
 
-    let response = agent.query(&canister_id, method_name).call().await;
+//     let response = agent.query(&canister_id, method_name).call().await; // incorrect
+    let response = agent.query(&canister_id, method_name).with_arg(candid::Encode!().unwrap()).call().await;
+
 
     if response.is_ok() {
         println!("response:{:#?}",response.unwrap());
